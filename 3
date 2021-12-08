@@ -1,0 +1,87 @@
+using System;
+using static System.Console;
+namespace ConsoleApp1
+{
+    // Агрегація
+    // 1. Клас, що описує точку
+    class Point
+    {
+        // Внутрішні поля класу - координати точки
+        public double x;
+        public double y;
+    }
+    // 2. Клас, що описує лінію
+    class Line
+
+    {
+        public Point pt1 = null;
+        public Point pt2 = null;
+    }
+    // 3. Клас, що описує масив фігур
+    class Figures
+    {
+        // 1. Внутрішні поля класу
+        public Point[] points; // масив точок
+        public Line[] lines; // масив ліній
+                             // 2. Конструктор класу
+        public Figures()
+        {
+            points = null;
+            lines = null;
+        }
+        // 3. Метод виведення елементів масиву на екран
+        public void Print()
+        {
+            WriteLine("Array points:");
+            for (int i = 0; i< points.Length; i++)
+{
+                WriteLine(" x = { 0}, y = { 1}", points[i].x, points[i].y);
+            }
+            WriteLine(" Array lines:");
+            for (int i = 0; i <lines.Length; i++)
+{
+                WriteLine(" pt1.x = { 0}, pt1.y = { 1}", lines[i].pt1.x, lines[i].pt1.y);
+                WriteLine(" pt2.x = { 0}, pt2.y = { 1}", lines[i].pt2.x, lines[i].pt2.y);
+            }
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Демонстрація агрегації на прикладі класів Figures, Point, Line
+            // 1. Створити екземпляр класу Figures
+            Figures fg = new Figures();
+            // 2. Створити масив з 5 точок, що є об&#39;єктами класу Point
+            //    об&#39;єкті (екземплярі) класу Figures
+            // 2.1. Виділити пам&#39;ять для 5 елементів масиву
+            fg.points = new Point[5];
+            // 2.2. Виділити пам&#39;ять для кожного елементу масиву
+            //       та заповнити їх значеннями
+            for (int i = 0; i < fg.points.Length; i++)
+
+{
+                fg.points[i] = new Point();
+                fg.points[i].x = i * i;
+                fg.points[i].y = i * i * i;
+            }
+            // 3. Створити масив з 3 ліній
+            // 3.1. Виділити пам&#39;ять для 3 елементів масиву
+            fg.lines = new Line[3];
+            // 3.2. Виділити пам&#39;ять для кожного елементу масиву
+            //      та заповнити їх значеннями
+            for (int i = 0; i < fg.lines.Length; i++)
+{
+                fg.lines[i] = new Line();
+                fg.lines[i].pt1 = new Point();
+                fg.lines[i].pt2 = new Point();
+                fg.lines[i].pt1.x = i;
+                fg.lines[i].pt1.y = i * 2;
+                fg.lines[i].pt2.x = i * 3;
+                fg.lines[i].pt2.y = i * i;
+            }
+            // 4. Вивести масив точок та ліній на екран
+            fg.Print();
+        }
+    }
+}
